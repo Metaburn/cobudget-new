@@ -212,12 +212,31 @@ export default {
       await sendEmail(
         {
           to: destination,
-          subject: `Welcome to ${process.env.PLATFORM_NAME} - confirm your account and get started!`,
-          html: `Welcome!
-        <br/><br/>
-        Your ${process.env.PLATFORM_NAME} account has been created! We're excited to welcome you to the community.
-        <br/><br/>
-        Please confirm your account by <a href="${link}">Clicking here</a>! Verification code: ${code}.
+          subject: `תודה שנרשמתם למערכת החלומות - Thank you for signing up for the Dreams Platform`,
+          html: `
+English Below
+<br/><br/>
+ברוכים וברוכות הבאות למערכת החלומות של מידברן,
+<br/>
+זה הזמן להתחיל לשתף את החלומות שלכם או להצטרף לחלום שכבר קיים וליצור יחד.
+<br/><br/>
+אנא אשרו את חשבונכם על ידי לחיצה 
+<a href="${link}">כאן</a>
+<br/>
+! קוד אימות: ${code}.
+<br/><br/>
+גלו איך זה עובד
+<br/><br/>
+Welcome to the Dreams Platform,
+<br/>
+<br/>
+It's time to start and share your dreams or join an existing dream and create together.
+<br/><br/>
+Please confirm your account by clicking <a href="${link}">Here</a>!
+<br/>
+Verification code: ${code}.
+<br/><br/>
+Find out how it works
         <br/><br/>
         ${footer}
       `,
@@ -242,31 +261,51 @@ export default {
         ? `Jump right in and <a href="${appLink(
             `/${collMemberships[0].round.group.slug}/${collMemberships[0].round.slug}`
           )}">create your first Dream</a>!`
-        : `Jump right in and <a href="${appLink(
-            "/new-round"
-          )}">create your first Project</a>!`;
+        : `Jump right in create your first Dream</a>!`;
 
     await sendEmail({
       to: newUser.email,
-      subject: `Welcome to ${process.env.PLATFORM_NAME}!`,
-      html: `You’ve just taken your first step towards co-creating ${process.env.PLATFORM_NAME}!
-      <br/><br/>
-      We are thrilled to have you with us!
-      <br/><br/>
-      <b>How to get started?</b>
-      <ul>
-      <li>Check out the <a href="https://dreams.midburn.org/">Dreams platform</a></li>
-      <li>${createYourFirst}</li>
-      </ul>
-      <br/>
-      <b>Want to learn more?</b>
-      <ul>
-      <li>Dig into <a href="https://dreams.midburn.org">Dreams</a> to see how others are using the tool</li>
-      </ul>
-      <br/>
-      Ready to invite others to co-create projects with you? <a href="${appLink(
-        "/new-round"
-      )}">Create a Project</a>!
+      subject: `מרגש! עשיתם את הצעד הראשון שלכם לחלום - Exciting! You've taken your first step towards the dream`,
+      html: `English Below<br/><br/>
+      זה עתה עשיתם את הצעד הראשון שלכם לקראת יצירה משותפת במערכת החלומות, ועוד צעד לעבר האבק.
+<br/><br/>
+יוצר/ת החלום יצור איתכם קשר במידה וזה יהיה רלוונטי.
+<br/><br/>
+מעוניינים לשתף אותנו בחלום שיש לכם?
+<br/>
+בדקו את
+<a href="https://dreams.midburn.org/">פלטפורמת החלומות</a>,
+<br/>
+קפצו ישר פנימה וצרו את הפרויקט הראשון שלכם.
+<br/>
+<br/>
+רוצים ללמוד עוד?
+<br/>
+הציצו בחלומות כדי לראות כיצד אחרים משתמשים.
+<br/>
+<br/>
+בהצלחה!
+
+<br/><br/>
+Exciting! You've taken your first step towards the dream.
+<br/><br/>
+You have just taken your first step towards collaborative creation in the Dream System, and another step towards the dust.
+<br/><br/>
+The dream creator will contact you if relevant.
+<br/><br/>
+Interested in sharing a dream you have?
+<br/>
+Check out the <a href="https://dreams.midburn.org/">Dream Platform</a>,
+<br/>
+${createYourFirst}
+<br/>
+<br/>
+Want to learn more?
+<br/>
+Dig into dreams to see how others are using it.
+<br/>
+<br/>
+Good luck!
       `,
     });
   },

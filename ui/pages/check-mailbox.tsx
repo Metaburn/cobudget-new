@@ -6,7 +6,7 @@ function CheckMailbox() {
   const code = router.query.c && decodeURIComponent(router.query.c.toString());
 
   return (
-    <div className="page text-gray-700">
+    <div className="page text-gray-700" dir="rtl">
       <div className="text-xl font-medium text-gray-500 py-10 text-center">
         <h1 className="text-xl font-medium">בדקי את המייל שלך!</h1>
         <br />

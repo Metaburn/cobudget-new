@@ -39,10 +39,16 @@ const CREATE_ROUND = gql`
   }
 `;
 
-export default function NewRoundPage({ currentGroup }) {
+export default function NewRoundPage({ currentGroup, currentUser }) {
   const [, createRound] = useMutation(CREATE_ROUND);
   const { handleSubmit, register, errors } = useForm();
   const [slugValue, setSlugValue] = useState("");
+
+  const isAdmin =
+      currentUser?.currentCollMember?.isAdmin ||
+      currentUser?.currentGroupMember?.isAdmin;
+
+  if (!isAdmin) return <div>Please use admin account</div>;
 
   const intl = useIntl();
 

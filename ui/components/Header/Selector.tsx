@@ -35,6 +35,9 @@ export default function Selector({
     (groupMember) => groupMember.group.id
   );
   const activeId = currentGroup ? currentGroup.id : round?.id;
+  const isAdmin =
+      currentUser?.currentCollMember?.isAdmin ||
+      currentUser?.currentGroupMember?.isAdmin;
   return (
     <Menu as="div" className="inline-block">
       <div>
@@ -148,7 +151,8 @@ export default function Selector({
                 );
               })}
           </div>
-          <Menu.Item>
+
+          {isAdmin && (<Menu.Item>
             {({ active }) => (
               <LinkItem
                 href={`/new-round`}
@@ -158,7 +162,8 @@ export default function Selector({
                 <FormattedMessage defaultMessage="New Round" />
               </LinkItem>
             )}
-          </Menu.Item>
+          </Menu.Item>)
+          }
         </Menu.Items>
       </Transition>
     </Menu>

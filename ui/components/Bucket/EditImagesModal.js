@@ -154,6 +154,7 @@ const EditImagesModal = ({
                     placeholder={intl.formatMessage({
                       defaultMessage: "Upload image",
                     })}
+                    accept="image/png, image/jpeg"
                     onChange={uploadFile}
                   />
                 </label>

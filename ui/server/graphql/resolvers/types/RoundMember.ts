@@ -40,6 +40,30 @@ export const email = async (member, _, { user, ss }) => {
   return u.email;
 };
 
+export const phoneNumber = async (member, _, { user, ss }) => {
+  if (!user) return null;
+  const currentCollMember = await prisma.roundMember.findUnique({
+    where: {
+      userId_roundId: {
+        userId: user.id,
+        roundId: member.roundId,
+      },
+    },
+  });
+
+  if (!(ss || currentCollMember?.isAdmin || currentCollMember?.id == member.id))
+    return null;
+
+  const u = await prisma.user.findFirst({
+    where: {
+      collMemberships: {
+        some: { id: member.id },
+      },
+    },
+  });
+  return u.phoneNumber;
+};
+
 export const name = async (member, _, { user }) => {
   if (!user) return null;
   const currentCollMember = await prisma.roundMember.findUnique({

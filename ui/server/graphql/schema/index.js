@@ -576,6 +576,7 @@ const schema = gql`
     createdAt: Date
     balance: Int # stored as cents
     email: String
+    phoneNumber: String
     name: String
     hasJoined: Boolean
     # roles: [Role]

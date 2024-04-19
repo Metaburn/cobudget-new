@@ -78,12 +78,12 @@ export const MEMBERS_QUERY = gql`
         createdAt
         balance
         email
+        phoneNumber
         hasJoined
         user {
           id
           username
           name
-          phoneNumber
           verifiedEmail
           avatar
         }
@@ -353,7 +353,7 @@ const Row = ({ member, deleteMember, updateMember, round, isAdmin }) => {
         ) : null}
       </TableCell>
       <TableCell>
-        <p data-testid="invited-participant-phonenumber">{member.user.phoneNumber}</p>
+        <p data-testid="invited-participant-phonenumber">{member.phoneNumber}</p>
       </TableCell>
       <TableCell component="th" scope="row">
         {member.bio && (

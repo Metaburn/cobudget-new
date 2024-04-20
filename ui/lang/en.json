@@ -593,5 +593,10 @@
   "zbmae5": "Open for joiners",
   "zff7tV": "Ready to be opened for hearts",
   "zvdC3E": "Unapprove for hearts",
-  "zx0myy": "Participants"
+  "zx0myy": "Participants",
+  "joindreamdescription": "שתפי על עצמך. אילו מתנות את יכולה לתת לחלום?",
+  "joindreamdescription2": "Share about yourself. What gift can you give to the dream?",
+  "joindreamfooter": "זה ייכתב כהערה פומבית ואימייל יישלח לחולם",
+  "joindreamfooter2": "This will be written as a public comment and an email will be sent to the dreamer",
+  "sendemailtocreator": "Comment & Email"
 }

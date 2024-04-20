@@ -1,5 +1,5 @@
 import Tooltip from '@tippyjs/react';
-import { useContext, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useMutation, gql } from 'urql';
 import Router from 'next/router';
 import { Modal } from '@material-ui/core';
@@ -24,7 +24,7 @@ import dayjs from 'dayjs';
 import Label from '../../components/Label';
 import getStatusColor from 'utils/getStatusColor';
 import Infobox from './Infobox';
-import Context from '../../contexts/comment';
+import JoinDreamModal from "./JoinDreamModal";
 
 const APPROVE_FOR_GRANTING_MUTATION = gql`
   mutation ApproveForGranting($bucketId: ID!, $approved: Boolean!) {
@@ -190,6 +190,7 @@ const BucketSidebar = ({
 }) => {
   const [contributeModalOpen, setContributeModalOpen] = useState(false);
   const [cocreatorModalOpen, setCocreatorModalOpen] = useState(false);
+  const [joinDreamModalOpen, setJoinDreamModalOpen] = useState(false);
   const [actionsDropdownOpen, setActionsDropdownOpen] = useState(false);
   const [confirmCancelBucketOpen, setConfirmCancelBucketOpen] = useState(false);
   const [enabledJoinDreamButton, setEnabledJoinDreamButton] = useState(true);
@@ -201,7 +202,6 @@ const BucketSidebar = ({
   const [, acceptFunding] = useMutation(ACCEPT_FUNDING_MUTATION);
   const [, deleteBucket] = useMutation(DELETE_BUCKET_MUTATION);
   const [, reopenFunding] = useMutation(REOPEN_FUNDING);
-  const { addComment } = useContext<any>(Context);
 
   const intl = useIntl();
 
@@ -329,20 +329,7 @@ const BucketSidebar = ({
           disabled={!enabledJoinDreamButton || !currentUser}
           color={bucket.round.color}
           onClick={() => {
-            setEnabledJoinDreamButton(false);
-            addComment({
-              bucketId: bucket.id,
-              content: 'I would like to join! - אשמח להצטרף לחלום',
-            }).then(({ error }) => {
-              if (error) {
-                return toast.error(error.message);
-              } else {
-                return toast.success(
-                  'Joined Dream Successfully 😎 - Dreamer got an email - הצטרפת בהצלחה - החולם קיבל מייל',
-                  { duration: 10000 }
-                );
-              }
-            });
+            setJoinDreamModalOpen(true);
           }}
           fullWidth
           testid="publish-bucket"
@@ -706,6 +693,18 @@ const BucketSidebar = ({
             cocreators={bucket.cocreators}
             bucket={bucket}
             currentUser={currentUser}
+          />
+
+          <JoinDreamModal
+              open={joinDreamModalOpen}
+              handleClose={(e: any, how: string, shouldDisable: boolean) => {
+                debugger;
+                setJoinDreamModalOpen(false);
+                if (shouldDisable) {
+                  setEnabledJoinDreamButton(false);
+                }
+              }}
+              bucket={bucket}
           />
         </div>
         <Tags bucket={bucket} canEdit={canEdit} />

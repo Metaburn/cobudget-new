@@ -1,22 +1,22 @@
-import { useState, useEffect, useRef } from "react";
-import { useMutation, gql, useQuery } from "urql";
-import ProfileDropdown from "components/ProfileDropdown";
-import Avatar from "components/Avatar";
-import GroupAndRoundHeader from "./GroupAndRoundHeader";
-import NavItem from "./NavItem";
-import toast from "react-hot-toast";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { LoaderIcon } from "components/Icons";
-import EditProfileModal from "./EditProfile";
-import { FormattedMessage, useIntl } from "react-intl";
-import dayjs from "dayjs";
-import { toMS } from "utils/date";
+import { useState, useEffect, useRef } from 'react';
+import { useMutation, gql, useQuery } from 'urql';
+import ProfileDropdown from 'components/ProfileDropdown';
+import Avatar from 'components/Avatar';
+import GroupAndRoundHeader from './GroupAndRoundHeader';
+import NavItem from './NavItem';
+import toast from 'react-hot-toast';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { LoaderIcon } from 'components/Icons';
+import EditProfileModal from './EditProfile';
+import { FormattedMessage, useIntl } from 'react-intl';
+import dayjs from 'dayjs';
+import { toMS } from 'utils/date';
 
 const css = {
   mobileProfileItem:
-    "mx-1 px-3 py-2 block text-gray-800 text-left rounded hover:bg-gray-200 focus:outline-none focus:ring",
+    'mx-1 px-3 py-2 block text-gray-800 text-left rounded hover:bg-gray-200 focus:outline-none focus:ring',
 };
 
 const JOIN_GROUP_MUTATION = gql`
@@ -125,7 +125,7 @@ const GET_SUPER_ADMIN_SESSION = gql`
 
 export const LandingPageLinks = ({ desktop }) => (
   <>
-    <NavItem className={desktop ? "ml-4" : ""} href="/about">
+    <NavItem className={desktop ? 'ml-4' : ''} href="/about">
       <FormattedMessage id="about" defaultMessage="About" />
     </NavItem>
     <NavItem href="/support">
@@ -137,7 +137,7 @@ export const LandingPageLinks = ({ desktop }) => (
     <NavItem
       href="mailto:dreams@midburn.org"
       onCLick={(e) => {
-        window.open("mailto:dreams@midburn.org");
+        window.open('mailto:dreams@midburn.org');
         e.preventDefault();
       }}
       external
@@ -162,7 +162,7 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
   const [, endSuperAdminSession] = useMutation(SUPER_ADMIN_END);
 
   const [, joinRound] = useMutation(JOIN_ROUND_MUTATION);
-  const color = round?.color ?? "anthracit";
+  const color = round?.color ?? 'anthracit';
   const [superAdminTime, setSuperAdminTime] = useState<HTMLElement>();
   const [inSession, setInSession] = useState(false);
 
@@ -175,12 +175,12 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
         const diff = ss?.start + ss?.duration * 60000 - Date.now();
         if (diff < 0 || !ss) {
           clearInterval(interval);
-          window.alert("Session Expired");
+          window.alert('Session Expired');
           setInSession(false);
           return;
         }
         if (superAdminTime && superAdminTime?.innerHTML) {
-          superAdminTime.innerHTML = toMS(diff) + "";
+          superAdminTime.innerHTML = toMS(diff) + '';
         }
       }, 1000);
       return () => clearInterval(interval);
@@ -192,8 +192,8 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
       ? `${round.title} | ${group.name}`
       : group.name
     : round
-      ? round.title
-      : process.env.PLATFORM_NAME;
+    ? round.title
+    : process.env.PLATFORM_NAME;
 
   const notAMember =
     !fetchingUser &&
@@ -202,44 +202,39 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
         currentUser?.currentCollMember.isRemoved));
   const isGroupAdmin = currentUser?.currentGroupMember?.isAdmin;
   const allowedToJoinOrRequest =
-    (round && round.registrationPolicy !== "INVITE_ONLY") || isGroupAdmin;
+    (round && round.registrationPolicy !== 'INVITE_ONLY') || isGroupAdmin;
 
   const showJoinRoundButton = round && notAMember && allowedToJoinOrRequest;
 
   useEffect(() => {
-    const showJoinRoundButton2 = round &&  // A copy to be evaluated on component mount
-      round.registrationPolicy !== "INVITE_ONLY" &&
+    const showJoinRoundButton2 =
+      round && // A copy to be evaluated on component mount
+      round.registrationPolicy !== 'INVITE_ONLY' &&
       !fetchingUser &&
       currentUser &&
       (!currentUser?.currentCollMember ||
         (!currentUser?.currentCollMember.isApproved &&
-          currentUser?.currentCollMember.isRemoved)
-      );
+          currentUser?.currentCollMember.isRemoved));
 
     if (showJoinRoundButton2) {
-      joinRound({ roundId: round?.id }).then(
-        ({ data, error }) => {
-          console.log({ data });
-          if (error) {
-            toast.error(error.message);
-          } else {
-            toast.success(
-              round.registrationPolicy === "REQUEST_TO_JOIN"
-                ? intl.formatMessage({
-                  defaultMessage: "Request sent!",
+      joinRound({ roundId: round?.id }).then(({ data, error }) => {
+        console.log({ data });
+        if (error) {
+          toast.error(error.message);
+        } else {
+          toast.success(
+            round.registrationPolicy === 'REQUEST_TO_JOIN'
+              ? intl.formatMessage({
+                  defaultMessage: 'Request sent!',
                 })
-                : intl.formatMessage({
-                  defaultMessage:
-                    "You joined this round!",
+              : intl.formatMessage({
+                  defaultMessage: 'You joined this round!',
                 })
-            );
-          }
+          );
         }
-      )
+      });
     }
-  }, [round])
-
-
+  }, [round]);
 
   return (
     <>
@@ -254,16 +249,13 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
         <div className=" sm:flex sm:justify-between sm:items-center sm:py-2 md:px-4 max-w-screen-xl mx-auto">
           <div className="flex items-center justify-between py-2 px-2 sm:p-0 relative min-w-0">
             <div className="flex items-center max-w-screen overflow-hidden">
-              {process.env.SINGLE_GROUP_MODE !== "true" && (
+              {process.env.SINGLE_GROUP_MODE !== 'true' && (
                 <>
                   <Link href="/">
                     <a
                       className={`p-1 text-white hover:text-white rounded-md font-medium flex space-x-4`}
                     >
-                      <img
-                        src="/cobudget-logo.png"
-                        className="h-6 max-w-none"
-                      />
+                      <img src="/midburn-logo.png" className="h-6 max-w-none" />
                       {!currentUser &&
                         !group &&
                         !round &&
@@ -319,14 +311,15 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
           </div>
 
           <nav
-            className={`${isMenuOpen ? "block" : "hidden"
-              } sm:m-0 sm:block bg-${color} sm:bg-transparent`}
+            className={`${
+              isMenuOpen ? 'block' : 'hidden'
+            } sm:m-0 sm:block bg-${color} sm:bg-transparent`}
           >
             <div className="py-2 sm:flex sm:p-0 sm:items-center">
               {currentUser ? (
                 <>
                   {currentUser?.currentCollMember?.isApproved &&
-                    currentUser?.currentCollMember?.hasJoined === false ? (
+                  currentUser?.currentCollMember?.hasJoined === false ? (
                     <NavItem
                       primary
                       roundColor={color}
@@ -339,7 +332,7 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
                             } else {
                               toast.success(
                                 intl.formatMessage({
-                                  defaultMessage: "Invitation Accepted",
+                                  defaultMessage: 'Invitation Accepted',
                                 })
                               );
                             }
@@ -391,7 +384,7 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
                   {!currentUser?.currentGroupMember &&
                     !round &&
                     group &&
-                    (group.registrationPolicy === "OPEN" ? (
+                    (group.registrationPolicy === 'OPEN' ? (
                       <NavItem
                         primary
                         roundColor={color}
@@ -399,7 +392,7 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
                       >
                         <FormattedMessage defaultMessage="Join group" />
                       </NavItem>
-                    ) : group.registrationPolicy === "REQUEST_TO_JOIN" ? (
+                    ) : group.registrationPolicy === 'REQUEST_TO_JOIN' ? (
                       <NavItem
                         primary
                         roundColor={color}
@@ -479,8 +472,9 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
               ) : (
                 <>
                   <NavItem
-                    href={`/login${router.pathname === `/login` ? "" : "?r=" + router.asPath
-                      }`}
+                    href={`/login${
+                      router.pathname === `/login` ? '' : '?r=' + router.asPath
+                    }`}
                     roundColor={color}
                   >
                     <FormattedMessage defaultMessage="Log in" />
@@ -514,13 +508,13 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
                   >
                     <FormattedMessage defaultMessage="Edit profile" />
                   </button>
-                  <Link href={"/settings"}>
+                  <Link href={'/settings'}>
                     <a className={css.mobileProfileItem}>
                       <FormattedMessage defaultMessage="Email settings" />
                     </a>
                   </Link>
                   <a
-                    href={"/api/auth/logout"}
+                    href={'/api/auth/logout'}
                     className={css.mobileProfileItem}
                   >
                     <FormattedMessage defaultMessage="Sign out" />

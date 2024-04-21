@@ -255,7 +255,10 @@ const Header = ({ currentUser, fetchingUser, group, round, bucket, ss }) => {
                     <a
                       className={`p-1 text-white hover:text-white rounded-md font-medium flex space-x-4`}
                     >
-                      <img src="/midburn-logo.png" className="h-6 max-w-none" />
+                      <img
+                        src="/midburn-logo.png"
+                        className="h-12 max-w-none"
+                      />
                       {!currentUser &&
                         !group &&
                         !round &&

@@ -14,7 +14,8 @@ function CheckMailbox() {
           <p>שלחנו לינק התחברות למייל</p>
           <p>{email ? email : 'your email'}</p>
           <p>לחצי עליו כדי להתחבר למערכת</p>
-          {code && <p>יהיה שם גם קוד אבל אין צורך לדאוג לגבי זה {code}!</p>}
+          {code && <p>יהיה שם גם קוד - הסתכלו שהוא תואם - אבל הלינק יחזיר אתכם חזרה בדיוק לאן שאתם צריכים!</p> }
+          {code && <p>{code}</p>}
         </div>
         <h1 className="text-xl font-medium" dir={'ltr'}>
           Check your mailbox!
@@ -24,7 +25,7 @@ function CheckMailbox() {
             We&apos;ve sent you a magic link to {email ? email : 'your email'}.
           </p>
           <p>Click on the link to finish signing in.</p>
-          {code && <p>Make sure the verification code matches {code}!</p>}
+          {code && <p>There will also be code - please ensure it matches: {code} - but the link will return you precisely to where you need to be!</p>}
         </div>
       </div>
     </div>

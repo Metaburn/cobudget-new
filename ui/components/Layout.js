@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import Header from "./Header";
-import { FormattedMessage } from "react-intl";
-import "../lib/beacon";
-import { supportedLangs } from "lang";
-import { useQuery, gql } from "urql";
+import React, { useEffect } from 'react';
+import Header from './Header';
+import { FormattedMessage } from 'react-intl';
+import '../lib/beacon';
+import { supportedLangs } from 'lang';
+import { useQuery, gql } from 'urql';
 
 const getLanguageProgressQuery = gql`
   query LanguageProgressPage {
@@ -53,6 +53,7 @@ const Layout = ({
 
   return (
     <div className="flex flex-col min-h-screen" id="hello-container" dir={dir}>
+      <link rel="shortcut icon" href="../public/favicon.ico" />
       <div>
         <Header
           currentUser={currentUser}
@@ -99,7 +100,7 @@ const Layout = ({
               <option key={option.value} value={option.value}>
                 {languageProgressLoading || !languageProgress[option.value]
                   ? option.label
-                  : option.label + " (" + languageProgress[option.value] + "%)"}
+                  : option.label + ' (' + languageProgress[option.value] + '%)'}
               </option>
             ))}
           </select>

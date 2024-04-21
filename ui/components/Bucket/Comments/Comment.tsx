@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import Avatar from "../../Avatar";
-import { DeleteIcon, EditIcon, FlagIcon } from "components/Icons";
-import EditComment from "./EditComment";
-import Context from "contexts/comment";
-import { LoaderIcon } from "../../Icons";
-import Markdown from "components/Markdown";
-import { FormattedMessage, useIntl } from "react-intl";
+import React, { useState, useContext } from 'react';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import Avatar from '../../Avatar';
+import { DeleteIcon, EditIcon, FlagIcon } from 'components/Icons';
+import EditComment from './EditComment';
+import Context from 'contexts/comment';
+import { LoaderIcon } from '../../Icons';
+import Markdown from 'components/Markdown';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 dayjs.extend(relativeTime);
 
@@ -30,7 +30,7 @@ const Comment = ({ comment, showBorderBottom }) => {
 
   return (
     <div className="flex my-4">
-      <div className="mr-4">
+      <div className="m-4">
         {comment.isLog ? (
           <LogIcon />
         ) : (
@@ -44,7 +44,7 @@ const Comment = ({ comment, showBorderBottom }) => {
         )}
       </div>
       <div
-        className={`flex-grow ${showBorderBottom && "border-b"} pb-4 min-w-0`}
+        className={`flex-grow ${showBorderBottom && 'border-b'} pb-4 min-w-0`}
       >
         <div className="flex justify-between items-center mb-2 text-gray-900 font-medium">
           {comment.isLog ? (
@@ -57,7 +57,7 @@ const Comment = ({ comment, showBorderBottom }) => {
             </h5>
           ) : (
             <h5 className="font-medium">
-              <span>{comment.roundMember?.user.name}</span>{" "}
+              <span>{comment.roundMember?.user.name}</span>{' '}
               {comment.roundMember.user.username && (
                 <span className="text-gray-500 font-normal">
                   @{comment.roundMember?.user.username}
@@ -95,7 +95,7 @@ const Comment = ({ comment, showBorderBottom }) => {
                     confirm(
                       intl.formatMessage({
                         defaultMessage:
-                          "Are you sure you would like to delete this comment?",
+                          'Are you sure you would like to delete this comment?',
                       })
                     ) &&
                     deleteComment({

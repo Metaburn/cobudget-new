@@ -333,7 +333,7 @@ const Row = ({ member, deleteMember, updateMember, round, isAdmin }) => {
         <div className="flex space-x-3">
           <Avatar user={member.user} />
           <div>
-            <p className="font-medium text-base">{member.user.name}</p>
+            <p className="font-medium text-base" style={{ width: 200, justifyContent: 'flex-start'}}>{`Hi ${member.user.name}`}</p>
             {member.user.username && (
               <p className="text-gray-700 text-sm">@{member.user.username}</p>
             )}

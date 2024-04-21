@@ -102,7 +102,7 @@ const projectDepartments = {
     '<br/><br/>' +
     "Get to know our cit'y departments and get involved",
   slug: 'departments',
-  labelColor: 'bg-app-purple',
+  labelColor: 'bg-app-red',
   id: 'departments',
 };
 
